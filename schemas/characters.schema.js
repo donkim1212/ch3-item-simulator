@@ -1,37 +1,41 @@
 import mongoose from "mongoose";
 import Equipments from "./equipments.schema.js";
 
-const charactersSchema = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    unique: true,
+const CharactersSchema = new mongoose.Schema(
+  {
+    character_id: {
+      type: Number,
+      unique: true,
+    },
+    name: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    health: {
+      type: Number,
+      default: 500,
+    },
+    power: {
+      type: Number,
+      default: 100,
+    },
+    equipments: {
+      type: mongoose.Schema.Types.ObjectId,
+      unique: true,
+      ref: "Equipments",
+    },
   },
-  character_id: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  health: {
-    type: Number,
-    required: true,
-    default: 500,
-  },
-  power: {
-    type: Number,
-    required: true,
-    default: 100,
-  },
-  equipments: {
-    type: Equipments,
-    required: true,
-    unique: true,
-  },
-});
+  { autoIndex: false },
+);
 
-export default mongoose.Model("Characters", charactersSchema);
+CharactersSchema.statics.getNextNumber = async () => {
+  const character = await Character.find().sort({ character_id: -1 }).limit(1).exec();
+  // console.log("Character: ", character[0]);
+  if (character) return character[0].character_id + 1;
+  return 1;
+};
+
+const Character = mongoose.model("Characters", CharactersSchema);
+
+export default Character;
