@@ -1,20 +1,15 @@
 import mongoose from "mongoose";
 import Items from "./items.schema.js";
+// import Characters from "./characters.schema.js";
 
-const equipmentsSchema = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    unique: true,
+const EquipmentsSchema = new mongoose.Schema(
+  {
+    equipped: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Items",
+    },
   },
-  character_id: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
-  equipped: {
-    type: Items,
-  },
-});
+  { autoIndex: false },
+);
 
-export default mongoose.model("Equipments", equipmentsSchema);
+export default mongoose.model("Equipments", EquipmentsSchema);

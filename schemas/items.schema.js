@@ -1,31 +1,27 @@
 import mongoose from "mongoose";
 
-const itemsSchema = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    requred: true,
-    unique: true,
+const ItemsSchema = new mongoose.Schema(
+  {
+    item_code: {
+      type: Number,
+      required: true,
+      unique: true,
+    },
+    item_name: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    health: {
+      type: Number,
+      default: 0,
+    },
+    power: {
+      type: Number,
+      default: 0,
+    },
   },
-  item_code: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
-  item_name: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  health: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  power: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-});
+  { autoIndex: false },
+);
 
-export default mongoose.model("Items", itemsSchema);
+export default mongoose.model("Items", ItemsSchema);

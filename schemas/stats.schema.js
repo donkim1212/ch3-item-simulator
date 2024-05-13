@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const statsSchema = new mongoose.Schema({
+const StatsSchema = new mongoose.Schema({
   HP: {
     type: Number,
     requred: true,
@@ -38,4 +38,4 @@ const statsSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("Stats", statsSchema);
+export default mongoose.model("Stats", StatsSchema);
