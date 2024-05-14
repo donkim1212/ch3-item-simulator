@@ -2,7 +2,7 @@ import express from "express";
 import Character from "../schemas/characters.schema.js";
 import Equipment from "../schemas/equipments.schema.js";
 import Item from "../schemas/items.schema.js";
-import cv from "../middlewares/characters.middlewares.js";
+import cv from "../middlewares/characters.validator.js";
 
 const router = express.Router();
 
