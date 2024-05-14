@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Equipments from "./equipments.schema.js";
+import Item from "./items.schema.js";
 
 const CharactersSchema = new mongoose.Schema(
   {
@@ -20,20 +20,43 @@ const CharactersSchema = new mongoose.Schema(
       type: Number,
       default: 100,
     },
-    equipments: {
-      type: mongoose.Schema.Types.ObjectId,
-      unique: true,
-      ref: "Equipments",
-    },
+    equipped: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Items",
+      },
+    ],
   },
   { autoIndex: false },
 );
 
+// Statics
+
 CharactersSchema.statics.getNextNumber = async () => {
   const character = await Character.find().sort({ character_id: -1 }).limit(1).exec();
   // console.log("Character: ", character[0]);
-  if (character) return character[0].character_id + 1;
+  if (character[0]) return character[0].character_id + 1;
   return 1;
+};
+
+CharactersSchema.statics.getEquippedArray = async (character_id) => {
+  const character = await Character.findOne({ character_id: character_id }).exec();
+  if (!character) return null;
+  const items = await Item.find({ _id: { $in: [character.equipped] } });
+  // console.log(items);
+  return items;
+};
+
+// Methods
+
+CharactersSchema.methods.totalEquippedStats = async (character) => {
+  return character.equipped.reduce(
+    async (acc, cur) => {
+      const item_stat = await Item.findById(cur).exec();
+      return [acc[0] + item_stat.health, acc[1] + item_stat.power];
+    },
+    [0, 0],
+  );
 };
 
 const Character = mongoose.model("Characters", CharactersSchema);
