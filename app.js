@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv/config";
 import characterRouter from "./routes/characters.route.js";
 import itemRouter from "./routes/items.route.js";
+import equipmentRouter from "./routes/equipments.route.js";
 import connect from "./schemas/connect.db.js";
 import logger from "./middlewares/logger.js";
 
@@ -21,7 +22,7 @@ app.get("/", (req, res) => {
 });
 
 // router
-app.use("/api", [characterRouter, itemRouter]);
+app.use("/api", [characterRouter, itemRouter, equipmentRouter]);
 
 app.listen(PORT, () => {
   console.log("Server running on port:", PORT);

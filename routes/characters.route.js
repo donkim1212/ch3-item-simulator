@@ -21,17 +21,11 @@ router.post("/characters", cv.characterNameValidation, async (req, res, next) =>
 
     const newId = await Character.getNextNumber();
 
-    const equipment = new Equipment({
-      character_id: newId,
-    });
-    await equipment.save();
-
     // character_id: await Character.getNextNumber(),
     // or simply use Trigger from MongoDB Atlas
     const character = new Character({
       character_id: newId,
       name: name,
-      equipments: equipment._id,
     });
     await character.save();
 
@@ -60,12 +54,12 @@ router.get("/characters/:character_id", cv.characterIdValidation, async (req, re
 
     const totalHealth = character.health;
     const totalPower = character.power;
-    const equipments = await Equipment.findOne({
+    const equipment = await Equipment.findOne({
       _id: character.equipments,
     });
 
-    if (equipments.equipped) {
-      const item = await Item.findOne({ _id: equipments.equipped });
+    if (equipment.equipped) {
+      const item = await Item.findOne({ _id: equipment.equipped });
       totalHealth += item.health;
       totalPower += item.power;
     }
@@ -86,7 +80,6 @@ router.get("/characters/:character_id", cv.characterIdValidation, async (req, re
  * UPDATE: Updates the character data by the given character_id, if present.
  */
 router.put("/characters/:character_id", cv.characterIdValidation, async (req, res) => {
-  //
   // const character_id = req.params.character_id;
   res.send(501).json({ errorMessage: "Update user not yet implemented." });
 });
