@@ -1,7 +1,8 @@
 const characterValidator = {
   characterIdValidation: (req, res, next) => {
     const cid = req.params.character_id;
-    if (cid === undefined || cid === null || typeof cid != "number") {
+    // cid === undefined || cid === null || typeof cid != "number"
+    if (!cid) {
       return res.status(400).json({
         errorMessage: `Invalid character_id: ${cid}`,
       });

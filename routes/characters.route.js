@@ -1,6 +1,7 @@
 import express from "express";
 import Character from "../schemas/characters.schema.js";
 import Equipment from "../schemas/equipments.schema.js";
+import Item from "../schemas/items.schema.js";
 import cv from "../middlewares/characters.middlewares.js";
 
 const router = express.Router();
@@ -46,15 +47,33 @@ router.post("/characters", cv.characterNameValidation, async (req, res, next) =>
 /**
  * READ: Get the data for the given character_id, if present.
  */
-router.get("/characters/:character_id", cv.characterIdValidation, async (req, res, next) => {
+router.get("/characters/:character_id", cv.characterIdValidation, async (req, res) => {
   try {
     const character_id = req.params.character_id;
     const character = await Character.findOne({
       character_id: character_id,
     }).exec();
-    if (character) return res.status(200).json(character);
-    return res.status(404).json({
-      errorMessage: `Character with character_id: ${character_id} does not exist.`,
+    if (!character)
+      return res.status(404).json({
+        errorMessage: `Character with character_id: ${character_id} does not exist.`,
+      });
+
+    const totalHealth = character.health;
+    const totalPower = character.power;
+    const equipments = await Equipment.findOne({
+      _id: character.equipments,
+    });
+
+    if (equipments.equipped) {
+      const item = await Item.findOne({ _id: equipments.equipped });
+      totalHealth += item.health;
+      totalPower += item.power;
+    }
+
+    return res.status(200).json({
+      name: character.name,
+      health: totalHealth,
+      power: totalPower,
     });
   } catch (err) {
     console.log(err.name);
