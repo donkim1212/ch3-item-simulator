@@ -32,7 +32,7 @@ const CharactersSchema = new mongoose.Schema(
 CharactersSchema.statics.getNextNumber = async () => {
   const character = await Character.find().sort({ character_id: -1 }).limit(1).exec();
   // console.log("Character: ", character[0]);
-  if (character) return character[0].character_id + 1;
+  if (character[0]) return character[0].character_id + 1;
   return 1;
 };
 

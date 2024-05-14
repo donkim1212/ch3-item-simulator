@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv/config";
 import characterRouter from "./routes/characters.route.js";
 import itemRouter from "./routes/items.route.js";
-import connect from "./schemas/connect.js";
+import connect from "./schemas/connect.db.js";
 import logger from "./middlewares/logger.js";
 
 const app = express();
