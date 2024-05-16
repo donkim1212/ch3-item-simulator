@@ -49,7 +49,10 @@ router.get(
         message: msg,
         item_code: item.item_code,
         item_name: item.item_name,
-        item_stat: item.item_stat,
+        item_stat: {
+          health: item.health,
+          power: item.power,
+        },
       });
     } catch (err) {
       next(err);
@@ -62,7 +65,10 @@ router.get(
  */
 router.get("/items", async (req, res) => {
   try {
-    const items = await Item.find().sort({ item_code: 1 }).exec();
+    const items = await Item.find()
+      .select("item_code item_name -_id")
+      .sort({ item_code: 1 })
+      .exec();
     if (!items) return res.status(200).json({});
     return res.status(200).json(items);
   } catch (err) {
