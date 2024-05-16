@@ -2,13 +2,19 @@
   "name": "ch3-item-simulator",
   "version": "1.0.0",
   "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest"
+  },
   "license": "MIT",
   "type": "module",
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "jest": "^29.7.0",
     "joi": "^17.13.1",
     "mongoose": "^8.3.4"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
