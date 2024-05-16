@@ -1,6 +1,6 @@
 # 개인 과제) 아이템 시뮬레이터
 
-## [사이트 링크](https://donkim1212.github.io/nbc_ch2_tmdb/)
+## [사이트 링크]([https://donkim1212.github.io/nbc_ch2_tmdb/](http://ec2-3-34-134-110.ap-northeast-2.compute.amazonaws.com:3000/))
 
 ## 개요
 
@@ -8,7 +8,7 @@
 
 과제 spec:[링크](https://teamsparta.notion.site/Node-js-c97fbe7a14194cd592b71a0019c4b4ad)
 
-## API 명세서 (작성중)
+## API 명세서
 
 ### API 목록
 <table>
@@ -34,7 +34,7 @@
   <tr>
     <td>캐릭터 조회</td><td>/api/characters/:character_id</td><td>GET</td>
     <td>
-      {}
+      -
     </td>
     <td>
       { "message": "Successfully retrieved character data.",<br>"data": { "name":"유저이름1", "health":500, "power":100 } }
@@ -43,10 +43,108 @@
   <tr>
     <td>캐릭터 삭제</td><td>/api/characters/:character_id</td><td>DELETE</td>
     <td>
-      {}
+      -
     </td>
     <td>
       { "message": "Successfully deleted user 1" }
+    </td>
+  </tr>
+</table>
+
+### Equipments
+<table>
+  <tr>
+    <td>Feature</td><td>API URL</td><td>Method</td><td>request</td><td>response</td>
+  </tr>
+  <tr>
+    <td>장비 조회</td><td>/api/equipments/:character_id</td><td>GET</td>
+    <td>
+      -
+    </td>
+    <td>
+      { "message": "Retrieving equipment data for character_id: 1",<br>
+      "data": [<br>
+      {"item_code":1, "item_name":"서리왕의 검"},<br>
+      {"item_code":2, "item_name":"나무 방패"}<br>
+      ]}
+    </td>
+  </tr>
+  <tr>
+    <td>장비 장착</td><td>/api/characters/:character_id</td><td>PUT</td>
+    <td>
+      # "equip" is boolean<br>
+      { "item_code": 3, "equip": true }
+    </td>
+    <td>
+      # "equip" = true<br>
+      { "message": "Equipped the item '가죽 장화'." }<br>
+      # "equip" = false<br>
+      { "message": "Unquipped the item '가죽 장화'." }
+    </td>
+  </tr>
+</table>
+
+### Items
+<table>
+  <tr>
+    <td>Feature</td><td>API URL</td><td>Method</td><td>request</td><td>response</td>
+  </tr>
+  <tr>
+    <td>아이템 생성</td><td>/api/items</td><td>POST</td>
+    <td>
+      {"item_code": 4,<br>
+      "item_name":"은 반지"<br>
+      "item_stat": {<br>
+        "health": 30,<br>
+        "power": 5<br>
+      }}
+    </td>
+    <td>
+      { "character_id": 1 }
+    </td>
+  </tr>
+  <tr>
+    <td>아이템 조회</td><td>/api/items/:item_code</td><td>GET</td>
+    <td>
+      -
+    </td>
+    <td>
+      # n is the item_code
+      { "message": "Successfully found item with item_code: n",<br>
+      "item_code": 4,<br>
+      "item_name":"은 반지"<br>
+      "item_stat": {<br>
+        "health": 30,<br>
+        "power": 5<br>
+      }}
+    </td>
+  </tr>
+  <tr>
+    <td>아이템 전체 조회</td><td>/api/items/</td><td>GET</td>
+    <td>
+      -
+    </td>
+    <td>
+      [<br>
+      { "item_code": 1, "item_name":"서리왕의 검" },<br>
+      { "item_code": 2, "item_name":"나무 방패" },<br>
+      { "item_code": 2, "item_name":"가죽 장화" },<br> ...
+      <br>]
+    </td>
+  </tr>
+  <tr>
+    <td>아이템 수정</td><td>/api/items/:item_code</td><td>PUT</td>
+    <td>
+      {<br>
+      	"item_name":"동 반지",<br>
+      	"item_stat": {<br>
+      		"health": 12,<br>
+      		"power": 2<br>
+      	}<br>
+      }
+    </td>
+    <td>
+      { "message": "Successfully updated the item with code: 4" }
     </td>
   </tr>
 </table>
