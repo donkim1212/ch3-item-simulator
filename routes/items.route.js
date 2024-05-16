@@ -14,7 +14,6 @@ router.post(
   iv.itemNameValiation,
   iv.itemStatValidation,
   async (req, res, next) => {
-    //
     const { item_code, item_name, item_stat } = req.body;
     let msg = `Successfully added the item: ${item_name}`;
     try {
@@ -25,7 +24,7 @@ router.post(
         power: item_stat.power,
       });
       await item.save();
-      return res.status(200).json({ message: msg });
+      return res.status(201).json({ message: msg });
     } catch (err) {
       next(err);
     }
