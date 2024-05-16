@@ -5,7 +5,7 @@ const itemCodeSchema = Joi.object({
   item_code: Joi.number().integer().min(1).required(),
 }).unknown(true);
 const itemNameSchema = Joi.object({
-  item_name: Joi.string().trim().min(1).max(30).alphanum().required(),
+  item_name: Joi.string().trim().min(1).max(30).required(),
 }).unknown(true);
 const itemStatSchema = Joi.object({
   item_stat: {

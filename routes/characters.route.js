@@ -1,6 +1,5 @@
 import express from "express";
 import Character from "../schemas/characters.schema.js";
-import Item from "../schemas/items.schema.js";
 import { characterValidatorJoi as cv } from "../middlewares/characters-validator.middleware.js";
 import CharacterNotFoundError from "../lib/errors/character-not-found.error.js";
 
@@ -28,7 +27,7 @@ router.post(
         character.name,
       );
 
-      return res.status(200).json({ character_id: character.character_id });
+      return res.status(201).json({ character_id: character.character_id });
     } catch (err) {
       next(err);
     }
