@@ -7,6 +7,9 @@
 
 과제 spec:[링크](https://teamsparta.notion.site/Node-js-c97fbe7a14194cd592b71a0019c4b4ad)
 
+## Wireframe
+![wireframe](https://github.com/donkim1212/ch3-item-simulator/assets/32076275/ce2e1083-8071-4ca4-81c6-f5480cd8b593)
+
 ## API 명세서
 
 ### API 목록
