@@ -4,11 +4,11 @@ const characterIdSchema = Joi.object({
   character_id: Joi.number().integer().min(1).required(),
 }).unknown(true);
 const characterNameSchema = Joi.object({
-  name: Joi.string().min(1).max(20).required(),
+  name: Joi.string().trim().min(1).max(20).alphanum().required(),
 }).unknown(true);
 
 const characterValidatorJoi = {
-  characterIdValidation: (req, res, next) => {
+  characterIdValidation: async function (req, res, next) {
     const validation = characterIdSchema.validate(req.params);
 
     if (validation.error) {

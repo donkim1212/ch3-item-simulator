@@ -5,7 +5,7 @@ const itemCodeSchema = Joi.object({
   item_code: Joi.number().integer().min(1).required(),
 }).unknown(true);
 const itemNameSchema = Joi.object({
-  item_name: Joi.string().min(1).max(30).required(),
+  item_name: Joi.string().trim().min(1).max(30).alphanum().required(),
 }).unknown(true);
 const itemStatSchema = Joi.object({
   item_stat: {
@@ -14,7 +14,7 @@ const itemStatSchema = Joi.object({
   },
 }).unknown(true);
 const itemEquipSchema = Joi.object({
-  equip: Joi.boolean().required(),
+  equip: Joi.boolean().strict().required(),
 }).unknown(true);
 
 const itemValidatorJoi = {
