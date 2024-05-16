@@ -1,7 +1,6 @@
 # 개인 과제) 아이템 시뮬레이터
 
-## [사이트 링크]([https://donkim1212.github.io/nbc_ch2_tmdb/](http://ec2-3-34-134-110.ap-northeast-2.compute.amazonaws.com:3000/))
-
+### [사이트 링크](http://ec2-3-34-134-110.ap-northeast-2.compute.amazonaws.com:3000/)
 ## 개요
 
 - Node.js, Express.js와 MongoDB를 사용하여 게임 아이템 시뮬레이션 기능을 구현합니다. 캐릭터의 생성과 조회, 아이템의 생성, 조회와 업데이트, 캐릭터에 아이템들을 장착/탈착하고 그에 맞게 스테이터스가 수정되는 기능이 구현되어 있습니다.
