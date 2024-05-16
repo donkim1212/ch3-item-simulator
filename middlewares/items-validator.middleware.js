@@ -18,7 +18,7 @@ const itemEquipSchema = Joi.object({
 }).unknown(true);
 
 const itemValidatorJoi = {
-  itemCodeValidation: (req, res, next) => {
+  itemCodeValidation: async function (req, res, next) {
     const target = {
       item_code: req.body.item_code || req.params.item_code,
     };
@@ -33,7 +33,7 @@ const itemValidatorJoi = {
 
     next();
   },
-  itemNameValiation: (req, res, next) => {
+  itemNameValiation: async function (req, res, next) {
     const validation = itemNameSchema.validate(req.body);
 
     if (validation.error) {
@@ -44,7 +44,7 @@ const itemValidatorJoi = {
 
     next();
   },
-  itemStatValidation: (req, res, next) => {
+  itemStatValidation: async function (req, res, next) {
     const validation = itemStatSchema.validate(req.body);
 
     if (validation.error) {
@@ -55,7 +55,7 @@ const itemValidatorJoi = {
 
     next();
   },
-  itemEquipValidation: (req, res, next) => {
+  itemEquipValidation: async function (req, res, next) {
     const validation = itemEquipSchema.validate(req.body);
 
     if (validation.error) {
