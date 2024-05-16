@@ -2,7 +2,7 @@ import Joi from "joi";
 
 const isNotNumber = /[^0-9]/;
 const itemCodeSchema = Joi.object({
-  item_code: Joi.number().integer().required(),
+  item_code: Joi.number().integer().min(1).required(),
 }).unknown(true);
 const itemNameSchema = Joi.object({
   item_name: Joi.string().min(1).max(30).required(),
