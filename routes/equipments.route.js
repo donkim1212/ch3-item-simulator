@@ -22,13 +22,17 @@ router.get(
 
       const character = await Character.findOne({
         character_id: character_id,
-      }).populate("equipped");
+      }).populate({
+        path: "equipped",
+        select: { item_code: 1, item_name: 1, _id: 0 },
+      });
 
       if (!character) throw new CharacterNotFoundError();
 
-      return res
-        .status(200)
-        .json({ message: msg, data: { ...character.equipped } });
+      return res.status(200).json({
+        message: msg,
+        data: character.equipped,
+      });
     } catch (err) {
       next(err);
     }

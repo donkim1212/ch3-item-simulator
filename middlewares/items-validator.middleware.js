@@ -5,7 +5,7 @@ const itemCodeSchema = Joi.object({
   item_code: Joi.number().integer().min(1).required(),
 }).unknown(true);
 const itemNameSchema = Joi.object({
-  item_name: Joi.string().min(1).max(30).required(),
+  item_name: Joi.string().trim().min(1).max(30).required(),
 }).unknown(true);
 const itemStatSchema = Joi.object({
   item_stat: {
@@ -14,11 +14,11 @@ const itemStatSchema = Joi.object({
   },
 }).unknown(true);
 const itemEquipSchema = Joi.object({
-  equip: Joi.boolean().required(),
+  equip: Joi.boolean().strict().required(),
 }).unknown(true);
 
 const itemValidatorJoi = {
-  itemCodeValidation: (req, res, next) => {
+  itemCodeValidation: async function (req, res, next) {
     const target = {
       item_code: req.body.item_code || req.params.item_code,
     };
@@ -33,7 +33,7 @@ const itemValidatorJoi = {
 
     next();
   },
-  itemNameValiation: (req, res, next) => {
+  itemNameValiation: async function (req, res, next) {
     const validation = itemNameSchema.validate(req.body);
 
     if (validation.error) {
@@ -44,7 +44,7 @@ const itemValidatorJoi = {
 
     next();
   },
-  itemStatValidation: (req, res, next) => {
+  itemStatValidation: async function (req, res, next) {
     const validation = itemStatSchema.validate(req.body);
 
     if (validation.error) {
@@ -55,7 +55,7 @@ const itemValidatorJoi = {
 
     next();
   },
-  itemEquipValidation: (req, res, next) => {
+  itemEquipValidation: async function (req, res, next) {
     const validation = itemEquipSchema.validate(req.body);
 
     if (validation.error) {
