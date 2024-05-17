@@ -4,7 +4,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "jest"
+    "test": "jest",
+    "format": "prettier --write *.js **/*.js"
   },
   "license": "MIT",
   "type": "module",
@@ -15,6 +16,7 @@
     "mongoose": "^8.3.4"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "prettier": "^3.2.5"
   }
 }
