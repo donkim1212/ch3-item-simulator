@@ -49,7 +49,7 @@ const itemValidatorJoi = {
 
     if (validation.error) {
       console.log("itemStatValidation: ", validation.error.message);
-      let msg = `Invalid item_stat: ${item_stat}`;
+      let msg = `Invalid item_stat: ${req.body.item_stat}`;
       return res.status(400).json({ errorMessage: msg });
     }
 
