@@ -72,7 +72,7 @@
     </td>
   </tr>
   <tr>
-    <td>장비 장착</td><td>/api/characters/:character_id</td><td>PUT</td>
+    <td>장비 장착</td><td>/api/equipments/:character_id</td><td>PUT</td>
     <td>
       # "equip" is boolean<br>
       { "item_code": 3, "equip": true }
