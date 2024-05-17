@@ -89,12 +89,13 @@ router.put(
     const { item_name, item_stat } = req.body;
     let msg = `Successfully updated the item with code: ${item_code}`;
     try {
-      const queryResult = await Item.updateOne(
+      const item = await Item.findOneAndUpdate(
         { item_code: item_code },
         { item_name: item_name, ...item_stat },
-      ).exec();
+        { new: true },
+      );
 
-      if (queryResult.matchedCount === 0) throw new ItemNotFoundError();
+      if (!item) throw new ItemNotFoundError();
 
       return res.status(200).json({ message: msg });
     } catch (err) {
